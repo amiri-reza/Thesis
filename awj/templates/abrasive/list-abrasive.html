@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+{% trans 'List Abrasives' %}
+{% endblock %}
+{% block content %}
+{% if messages %}
+<p> Messages </p>
+<ul class="messages">
+    {% for message in messages %}
+    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if abrasives %}
+{% for abrasive in abrasives %}
+<div class="text-center mt-5">
+    <a 
+    type="button" 
+    class="btn btn-light mt-2" 
+    href="{% url 'abrasive:detail-abrasive' abrasive.id %}"
+    >
+        {{ abrasive.name }}
+    </a>
+
+</div>
+{% endfor %}
+{% else %}
+<br />
+{% trans 'There is no abrasive meterial to show!' %}
+{% endif %}
+
+
+<hr />
+<footer>
+    <div class="text-center mt-3">
+        <a type="button" class="btn btn-secondary"
+        href="{% url 'landingpage' %}"
+        >
+        {% trans 'Back' %}
+        </a>
+    </div>
+</footer>
+
+
+
+{% endblock %}

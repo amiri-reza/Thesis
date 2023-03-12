@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% load i18n %} {% block title %} 
+{% trans 'Natural Stone Detail' %} {% endblock %} {% block content %}
+
+
+{% if messages %}
+<p>Messages</p>
+<ul class="messages">
+  {% for message in messages %}
+  <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}>
+    {{ message }}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %} 
+
+<div class="text-center pt-4">
+    <h4>
+      {% trans 'Natural Stone Name:' %}{{ object.name }} 
+    </h4>
+      {% for name, value in naturalstones.physicalproperties.get_fields %}
+        {% if name != "id" and name != "stone" %}
+          {% if value %}
+          <p>{{ name }}:&ThickSpace;{{ value }}</p>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      {% for name, value in naturalstones.mechanicalproperties.get_fields %}
+        {% if name != "id" and name != "stone" %}
+          {% if value %}
+          <p>{{ name }}:&ThickSpace;{{ value }}</p>
+          {% endif %}
+        {% endif %}
+      {% endfor %}   
+</div>
+<br />
+<div class="text-center">
+<a
+  type="button"
+  class="btn btn-primary mb-2 mt-4 "
+  href="{% url 'atik:update-stone' object.id %}"
+>
+  {% trans 'Update Name and Chemical Compounds' %}
+</a>
+<br />
+<a
+  type="button"
+  class="btn btn-primary mb-2"
+  href="{% url 'atik:update-physical' object.pk %}"
+>
+  {% trans 'Update Physical Properties' %}
+</a>
+<br />
+<a
+  type="button"
+  class="btn btn-primary mb-2"
+  href="{% url 'atik:update-mechanical' object.id %}"
+>
+  {% trans 'Update Mechanical Properties' %}
+</a>
+<hr />
+<form action="{% url 'atik:delete-stone' object.id %}" method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger" type="submit">Delete</button>
+  <a type="button" class="btn btn-secondary" href="{% url 'atik:list-stone' %}">
+    {% trans 'Back' %}
+  </a>
+</form>
+</div>
+{% endblock %}

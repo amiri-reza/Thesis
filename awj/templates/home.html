@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+{% trans 'Homepage' %}
+{% endblock %}
+{% block content %}
+{% if messages %}
+<p> Messages </p>
+<ul class="messages">
+    {% for message in messages %}
+    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="text-center">
+    <h2>{% trans 'Welcome!' %}</h2>
+    <hr />
+        <p>{% trans 'Natural Stones' %}</p>
+        <a 
+            href="{% url 'atik:add-stone' %}"
+            type="button"
+            class="btn btn-primary"
+        >
+            {% trans 'Add Natural Stone' %}
+        </a>
+        <a 
+            href="{% url 'atik:list-stone' %}"
+            type="button"
+            class="btn btn-primary"
+        >
+            {% trans 'List of Natural Stones' %}
+        </a>
+    <hr />
+    <p>{% trans 'Abrasives' %}</p>
+        <a href="{% url 'abrasive:add-abrasive' %}"
+            type="button"
+            class="btn btn-primary"
+        >
+            {% trans 'Add Abrasive' %}
+        </a>
+        <a href="{% url 'abrasive:list-abrasive' %}"
+            type="button"
+            class="btn btn-primary"
+        >
+            {% trans 'List of Abrasives' %}
+        </a>
+    <hr />
+    <a 
+        href="{% url 'cutting:result' %}"
+        type="button"
+        class="btn btn-primary"
+    >
+        {% trans 'Cutting Results' %}
+    </a>
+    <hr />
+    <p>{% trans 'PLOTS' %}</p>
+    <hr />
+    <a 
+        href="{% url 'plots:plots' plot='kesme_derinligi' %}"
+        type="button"
+        class="btn btn-primary"
+    >
+        {% trans 'Cutting Depth' %}
+    </a>
+    <a 
+    href="{% url 'plots:plots' plot='kd_max' %}"
+    type="button"
+    class="btn btn-primary"
+    >
+        {% trans 'Cutting Depth Max' %}
+    </a>
+    <a 
+        href="{% url 'plots:plots' plot='kd_min' %}"
+        type="button"
+        class="btn btn-primary"
+    >
+        {% trans 'Cutting Depth Min' %}
+    </a>
+    <hr />
+    <a 
+        href="{% url 'plots:plots' plot='kesme_asinma' %}"
+        type="button"
+        class="btn btn-primary"
+    >
+        {% trans 'Cutting Wear Zone' %}
+    </a>
+    <a 
+    href="{% url 'plots:plots' plot='ka_max' %}"
+    type="button"
+    class="btn btn-primary"
+    >
+        {% trans 'Cutting Wear Zone Max' %}
+    </a>
+    <a 
+        href="{% url 'plots:plots' plot='ka_min' %}"
+        type="button"
+        class="btn btn-primary"
+    >
+        {% trans 'Cutting Wear Zone Min' %}
+    </a>
+    <hr />
+    <a 
+        href="{% url 'plots:plots' plot='kesme_genisligi' %}"
+        type="button"
+        class="btn btn-primary"
+    >
+        {% trans 'Cutting Width' %}
+    </a>
+
+    <hr />
+    <a 
+    href="{% url 'plots:plots' plot='yuzey_puruzlulugu' %}"
+    type="button"
+    class="btn btn-primary"
+    >
+        {% trans 'Surface Roughness' %}
+    </a>
+
+    <hr />
+    <a 
+    href="{% url 'plots:plots' plot='kerf_acisi' %}"
+    type="button"
+    class="btn btn-primary"
+    >
+    {% trans 'Kerf Angle' %}
+    </a>
+
+    <hr />
+    <a 
+    href="{% url 'plots:plots' plot='plaka_agirlik_kaybi' %}"
+    type="button"
+    class="btn btn-primary"
+    >
+    {% trans 'Plate Weight Loss' %}
+    </a>
+
+    <hr />
+    <p>{% trans 'COEFFICIENT CORRELATIONS' %}</p>
+    <hr />
+
+</div>
+
+<div class="text-end">
+    <a 
+        href="{% url 'admin:index' %}"
+        type="button"
+        class="btn btn-warning mr-3"
+    >
+        {% trans 'Admin Control Panel' %}
+    </a>
+<hr />
+
+</div>
+
+{% endblock %}
