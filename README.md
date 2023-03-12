@@ -1,0 +1,1 @@
+This Repo contains my PhD Thesis Project which focuses on importing csv raw data, CRUD operation on natural stones list and abrasives list, ploting the result of cutting process and finding relation between various properties.
