@@ -137,7 +137,15 @@
     <hr />
     <p>{% trans 'COEFFICIENT CORRELATIONS' %}</p>
     <hr />
+    <a 
+    href="{% url 'plots:corr' %}"
+    type="button"
+    class="btn btn-primary"
+    >
+    {% trans 'Coefficient Correlation of Data' %}
+    </a>
 
+    <hr />
 </div>
 
 <div class="text-end">
