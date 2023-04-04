@@ -137,14 +137,22 @@ def corr_plotter(request):
     return render(request, "plots/corr.html", context)
 
 
-qs_mc = MechanicalProperties.objects.all()
-df_mc = read_frame(qs_mc)
+	
 
-qs_st = NaturalStones.objects.all()
-df_st = read_frame(qs_st)
 
-qs_ab = Abrasives.objects.all()
-df_ab = read_frame(qs_ab)
+def max_min_cutting_depth_corr(request):
+    # Load the data into a DataFrame
+    df = pd.read_csv("static/csv/table6.csv", sep=";")
 
-qs_apr = AbrasiveProperties.objects.all()
-df_apr = read_frame(qs_apr)
+    # Calculate the correlation matrix
+    corr_matrix = df[["ortalama", "max", "min"]].corr()
+
+    # Print the correlation coefficients
+    print(corr_matrix["min"])
+    print(corr_matrix["max"])
+
+    fig = px.bar(corr_matrix)
+    gantt_plot = plt(fig, output_type="div")
+    context = {"plot_div":gantt_plot}
+
+    return render(request, "plots/cut-max-min-corr.html", context)
