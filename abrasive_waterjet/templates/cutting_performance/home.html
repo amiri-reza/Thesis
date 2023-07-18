@@ -1,0 +1,27 @@
+stones
+{% for stone in stones %}
+<br>
+<a href="{% url 'stone-detail' stone.pk %}">{{stone}}</a>
+{% endfor %}
+<hr>
+abrasives
+{% for abrasive in abrasives %}
+<br>
+<a href="{% url 'abrasive-detail' abrasive.pk %}">{{abrasive}}</a>
+
+{% endfor %}
+
+<hr>
+
+{% for data in cutting_data %}
+<br>
+<a href="{% url 'cutting-data-detail' data.pk %}">{{data}}</a>
+
+{% endfor %}
+<hr>
+ADD DATA:
+<a href='{% url "stones-add" %}'>add stone</a>
+<a href='{% url "abrasives-add" %}'>add abrasive</a>
+<a href='{% url "cutting-data-add" %}'>add cutting data</a>
+
+

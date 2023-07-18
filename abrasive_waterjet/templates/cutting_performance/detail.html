@@ -1,0 +1,27 @@
+{{ object }}
+<br>
+{% if type == 'stone' %}
+<a href='{% url "stone-update" object.pk %}'>update</a>
+<form action='{% url "stone-delete" object.pk %}' method="post">
+    
+    {% csrf_token %}
+    <button type="submit">delete</button>
+</form>
+
+{% elif type == 'abrasive' %}
+<a href='{% url "abrasive-update" object.pk %}'>update</a>
+<form action='{% url "abrasive-delete" object.pk %}' method="post">
+    
+    {% csrf_token %}
+    <button type="submit">delete</button>
+</form>
+{% elif type == 'cutting-data' %}
+<a href='{% url "cutting-data-update" object.pk %}'>update</a>
+<form action='{% url "cutting-data-delete" object.pk %}' method="post">
+    
+    {% csrf_token %}
+    <button type="submit">delete</button>
+</form>
+{% endif %}
+<a href='{% url "home" %}'>home</a>
+

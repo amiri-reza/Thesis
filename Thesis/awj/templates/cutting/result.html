@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+{% trans 'Cutting Results' %}
+{% endblock %}
+{% block content %}
+{% if messages %}
+<p> Messages </p>
+<ul class="messages">
+    {% for message in messages %}
+    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<table id="myTable" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">{% trans 'Natural Stone' %}</th>
+        <th scope="col">{% trans 'Abrasive' %}</th>
+        <th scope="col">{% trans 'Cutting Speed' %}</th>
+        <th scope="col">{% trans 'Cutting Depth' %}</th>
+        <th scope="col">{% trans 'Maximum Cutting Depth' %}</th>
+        <th scope="col">{% trans 'Minimum Cutting Depth' %}</th>
+        <th scope="col">{% trans 'Cutting Wear Zone' %}</th>
+        <th scope="col">{% trans 'Maximum Cutting Wear' %}</th>
+        <th scope="col">{% trans 'Minimum Cutting Wear' %}</th>
+        <th scope="col">{% trans 'Cutting Width' %}</th>
+        <th scope="col">{% trans 'Surface Roughness' %}</th>
+        <th scope="col">{% trans 'Kerf Angle' %}</th>
+        <th scope="col">{% trans 'Plate Weight Loss' %}</th>
+      </tr>
+    </thead>
+    {% if results %}
+    {% for result in results %}
+    <tr>
+        <td class="text-nowrap">{{ result.stone.name }}</td>
+        <td class="text-nowrap">{{ result.abrasive.name }}</td>
+        <td>{{ result.kesme_hizi }}</td>
+        <td>{{ result.kesme_derinligi }}</td>
+        <td>{{ result.kd_max }}</td>
+        <td>{{ result.kd_min }}</td>
+        <td>{{ result.kesme_asinma }}</td>
+        <td>{{ result.ka_max }}</td>
+        <td>{{ result.ka_min }}</td>
+        <td>{{ result.kesme_genisligi }}</td>
+        <td>{{ result.yuzey_puruzlulugu }}</td>
+        <td>{{ result.kerf_acisi }}</td>
+        <td>{{ result.plaka_agirlik_kaybi }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <script>
+    $(document).ready(function() {
+      // Define the click event handler for the column headers
+      $("#myTable th").click(function() {
+        var index = $(this).index(); // Get the index of the clicked column
+        var rows = $("#myTable tbody tr").get(); // Get all the rows in the table body
+        rows.sort(function(a, b) { // Sort the rows based on the text content of the clicked column
+          var aText = $(a).children("td").eq(index).text();
+          var bText = $(b).children("td").eq(index).text();
+          return $.isNumeric(aText) && $.isNumeric(bText) ? aText - bText : aText.localeCompare(bText);
+        });
+        $("#myTable tbody").empty().append(rows); // Update the table body with the sorted rows
+      });
+    });
+  </script>
+<br />
+<div class="text-center">
+<a type="button" class="btn btn-primary mb-5"
+href="{% url 'landingpage' %}">
+    {% trans 'Back' %}
+</a>
+</div>
+
+{% else %}
+{% trans 'There is no cutting results added' %}
+{% endif %}
+{% endblock %}
