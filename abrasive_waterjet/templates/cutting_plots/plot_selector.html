@@ -1,0 +1,6 @@
+<form action="" method="post">
+    <p> Please Select a Cutting Parameter to show its' corresponding plot</p>
+    {% csrf_token %}
+    {{ form.cutting_parameter }}
+    <button> GO</button>
+</form>

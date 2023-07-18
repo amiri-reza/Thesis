@@ -1,0 +1,13 @@
+black
+Django
+django-extensions
+django-pandas
+docker
+docker-compose
+matplotlib
+matplotlib-inline
+numpy
+pandas
+plotly
+python-dotenv
+seaborn
