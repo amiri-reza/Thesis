@@ -1,3 +1,8 @@
+
+<a href="{% url 'main-page' %}" >Back to the Main Page</a>
+<p><a href="{% url 'cutting_plots:plot_selector' %}">Back to the Plot Selector</a></p>
+<hr>
+
 {% autoescape off %}
 {{ plot1 }}{{ plot2 }}{{ plot3 }}
 {% endautoescape %}

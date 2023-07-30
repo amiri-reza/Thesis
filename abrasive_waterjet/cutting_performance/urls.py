@@ -17,7 +17,7 @@ from cutting_performance.views import (
 
 
 )
-
+app_name = "cut"
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
     path("stones/add/", StonesAdd.as_view(), name="stones-add"),

@@ -31,19 +31,19 @@ class HomeView(TemplateView):
 class StonesAdd(CreateView):
     model = NaturalStone
     template_name = "cutting_performance/add.html"
-    success_url = reverse_lazy("stones-add")
+    success_url = reverse_lazy("cut:stones-add")
     fields = "__all__"
 
 class AbrasivesAdd(CreateView):
     model = Abrasive
     template_name = "cutting_performance/add.html"
-    success_url = reverse_lazy("abrasives-add")
+    success_url = reverse_lazy("cut:abrasives-add")
     fields = "__all__"
 
 class CuttingDataAdd(CreateView):
     model = CuttingData
     template_name = "cutting_performance/add.html"
-    success_url = reverse_lazy("cutting-data-add")
+    success_url = reverse_lazy("cut:cutting-data-add")
     fields = "__all__"
 
 # DETAILS OF EACH MODEL ---------------------------------------------
@@ -77,7 +77,7 @@ class StoneUpdate(UpdateView):
     template_name = "cutting_performance/update.html"
     def get_success_url(self):
         stone_id = self.object.id
-        return reverse_lazy("stone-update", kwargs={"pk":stone_id})  
+        return reverse_lazy("cut:stone-update", kwargs={"pk":stone_id})  
     fields = "__all__"
 
 class AbrasiveUpdate(UpdateView):
@@ -85,7 +85,7 @@ class AbrasiveUpdate(UpdateView):
     template_name = "cutting_performance/update.html"
     def get_success_url(self):
         abrasive_id = self.object.id
-        return reverse_lazy("abrasive-update", kwargs={"pk":abrasive_id})  
+        return reverse_lazy("cut:abrasive-update", kwargs={"pk":abrasive_id})  
     fields = "__all__"
 
 class CuttingDataUpdate(UpdateView):
@@ -93,21 +93,21 @@ class CuttingDataUpdate(UpdateView):
     template_name = "cutting_performance/update.html"
     def get_success_url(self):
         cutting_data_id = self.object.id
-        return reverse_lazy("cutting-data-update", kwargs={"pk":cutting_data_id})    
+        return reverse_lazy("cut:cutting-data-update", kwargs={"pk":cutting_data_id})    
     fields = "__all__"
 
 # DELETE EACH ELEMENT IN MODELS -------------------------------------
 class StoneDelete(DeleteView):
     model = NaturalStone
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("cut:home")
     template_name = "cutting_performance/detail.html"
 
 class AbrasiveDelete(DeleteView):
     model = Abrasive
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("cut:home")
     template_name = "cutting_performance/detail.html"
 
 class CuttingDataDelete(DeleteView):
     model = CuttingData
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("cut:home")
     template_name = "cutting_performance/detail.html"    
