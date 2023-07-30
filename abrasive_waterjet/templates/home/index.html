@@ -392,7 +392,7 @@
     				</div>
   				</div>
   				<div class="col-md-8">
-    				<div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url({% static 'img/project-5.jpg' %});">
+    				<div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url({% static 'img/data.png' %});">
     					<div class="overlay"></div>
 	    				<div class="text text-center p-4">
 	    					<h3><a href="{% url 'cut:home' %}">Abrasive Waterjet Cutting Data</a></h3>
@@ -402,7 +402,7 @@
   				</div>
 
     			<div class="col-md-8">
-    				<div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url({% static 'img/project-1.jpg' %});">
+    				<div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url({% static 'img/plotly.png' %});">
     					<div class="overlay"></div>
 	    				<div class="text text-center p-4">
 	    					<h3><a href="{% url 'cutting_plots:plot_selector' %}">Plots of Cutting Performance Indicators</a></h3>
@@ -596,24 +596,27 @@
         </div>
 
         <div class="row no-gutters block-9">
-          <div class="col-md-6 order-md-last d-flex">
-            <form action="#" class="bg-light p-4 p-md-5 contact-form">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
-              </div>
-              <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-              </div>
-            </form>
+			<div class="col-md-6 order-md-last d-flex">
+				<form action="{% url 'main-page' %}" class="bg-light p-4 p-md-5 contact-form" method="post">
+					{% csrf_token %}
+					<div class="form-group">
+						<input type="text" class="form-control" name="sender_name" placeholder="Your Name">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" name="sender_email" placeholder="Your Email">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" name="subject" placeholder="Subject">
+					</div>
+					<div class="form-group">
+						<textarea name="text" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+					</div>
+				</form>
+			</div>
+		</div>
           
           </div>
 

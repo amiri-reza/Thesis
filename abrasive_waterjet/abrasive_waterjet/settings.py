@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-_j9i0e4^z14uikvinm#ugo95#l^fyc49wb+657-6clp31v!9r7"
+SECRET_KEY = os.getenv("SECRET_KEY") 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -136,3 +136,47 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.Users'
 LOGIN_URL = 'users:signin'
+
+
+
+# settings.py
+
+import logging
+
+# ... other settings ...
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',  # You can set this to 'DEBUG' for more detailed logging
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',  # You can set this to 'DEBUG' for more detailed logging
+            'propagate': False,
+        },
+        'email_app': {  # Replace 'email_app' with the name of your Django app containing the view
+            'handlers': ['console'],
+            'level': 'INFO',  # You can set this to 'DEBUG' for more detailed logging
+            'propagate': False,
+        },
+    },
+}
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv("EMAIL_HOST")  # Replace with the SMTP server you want to use
+EMAIL_PORT = os.getenv("EMAIL_PORT")  # TLS port for Gmail, use 465 for SSL if necessary
+EMAIL_USE_TLS = True  # Set to True for TLS, False if using SSL
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")   # Replace with your Gmail username
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  # Replace with your Gmail password or App Password (if applicable)

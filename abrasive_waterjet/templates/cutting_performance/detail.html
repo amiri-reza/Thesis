@@ -1,9 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Table</title>
+    <style>
+        /* Optional CSS to style the table for better visual separation */
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
 {{ object }}
+
 <br>
+
 {% if type == 'stone' %}
 <a href='{% url "cut:stone-update" object.pk %}'>update</a>
 <form action='{% url "cut:stone-delete" object.pk %}' method="post">
-    
     {% csrf_token %}
     <button type="submit">delete</button>
 </form>
@@ -11,17 +34,95 @@
 {% elif type == 'abrasive' %}
 <a href='{% url "cut:abrasive-update" object.pk %}'>update</a>
 <form action='{% url "cut:abrasive-delete" object.pk %}' method="post">
-    
     {% csrf_token %}
     <button type="submit">delete</button>
 </form>
+
 {% elif type == 'cutting-data' %}
+<h1>Data Table</h1>
+<table>
+    <tbody>
+        <tr>
+            <th>ID</th>
+            <td>{{ object.id }}</td>
+            <th>Cutting Speed</th>
+            <td>{{ object.cutting_speed }}</td>
+        </tr>
+        <tr>
+            <th>Cutting Depth</th>
+            <td>{{ object.cutting_depth }}</td>
+            <th>CD Std Dev</th>
+            <td>{{ object.cd_stddev }}</td>
+        </tr>
+        <tr>
+            <th>CD Max</th>
+            <td>{{ object.cd_max }}</td>
+            <th>CD Min</th>
+            <td>{{ object.cd_min }}</td>
+        </tr>
+        <tr>
+            <th>Wear Zone Depth</th>
+            <td>{{ object.wear_zone_depth }}</td>
+            <th>WZ Std Dev</th>
+            <td>{{ object.wz_stddev }}</td>
+        </tr>
+        <tr>
+            <th>WZ Max</th>
+            <td>{{ object.wz_max }}</td>
+            <th>WZ Min</th>
+            <td>{{ object.wz_min }}</td>
+        </tr>
+        <tr>
+            <th>Cutting Width</th>
+            <td>{{ object.cutting_width }}</td>
+            <th>CW Std Dev</th>
+            <td>{{ object.cw_stddev }}</td>
+        </tr>
+        <tr>
+            <th>Kerf Angle</th>
+            <td>{{ object.kerf_angle }}</td>
+            <th>Material Removal Rate</th>
+            <td>{{ object.material_removal_rate }}</td>
+        </tr>
+        <tr>
+            <th>Ra Surface Roughness</th>
+            <td>{{ object.ra_surface_roughness }}</td>
+            <th>Ra Std Dev</th>
+            <td>{{ object.ra_stddev }}</td>
+        </tr>
+        <tr>
+            <th>Rq Surface Roughness</th>
+            <td>{{ object.rq_surface_roughness }}</td>
+            <th>Rq Std Dev</th>
+            <td>{{ object.rq_stddev }}</td>
+        </tr>
+        <tr>
+            <th>Rz Surface Roughness</th>
+            <td>{{ object.rz_surface_roughness }}</td>
+            <th>Rz Std Dev</th>
+            <td>{{ object.rz_stddev }}</td>
+        </tr>
+        <tr>
+            <th>Abrasive ID</th>
+            <td>{{ object.abrasive_id }}</td>
+            <th>Natural Stone ID</th>
+            <td>{{ object.natural_stone_id }}</td>
+        </tr>
+        <tr>
+            <th>Sample Number</th>
+            <td colspan="3">{{ object.sample_number }}</td>
+        </tr>
+    </tbody>
+</table>
 <a href='{% url "cut:cutting-data-update" object.pk %}'>update</a>
 <form action='{% url "cut:cutting-data-delete" object.pk %}' method="post">
-    
     {% csrf_token %}
     <button type="submit">delete</button>
 </form>
 {% endif %}
+
 <a href='{% url "cut:home" %}'>home</a>
 
+
+</body>
+</html>
