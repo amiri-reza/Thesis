@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -18,10 +19,18 @@ import logging
 from users.models import Users
 
 
+class HomeView(TemplateView):
+    template_name = "users/home.html"
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["user"] = Users.objects.get(id = self.request.user.id)
+        return context
+
 class SignIn(FormView):
     template_name = "users/signin.html"
     form_class = SignInForm
-    success_url = reverse_lazy("dashboard")
+    success_url = reverse_lazy("users:home")
     redirect_authenticated_user = True
 
     

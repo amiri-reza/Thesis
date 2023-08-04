@@ -19,7 +19,7 @@ class MainPage(TemplateView):
         context['form'] = EmailForm()
         return context
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         form = EmailForm(request.POST)
         if form.is_valid():
             text = json.dumps({
